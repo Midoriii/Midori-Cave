@@ -62,16 +62,16 @@ public class Bottle {
 	private String country;
 	
 	// A Link to a shop where it can be bought
-	@Column
 	@URL
+	@Column
 	private String link;
 	
 	@Column
 	private String description;
 	
 	// A link to the url of an image of the bottle
-	@Column
 	@URL
+	@Column
 	private String img_url;
 	
 }
