@@ -9,6 +9,7 @@ import com.apprehension.midoricave.Model.Bottle;
 
 /**
  * Mapstruct Mapper for Bottle DAO <-> DTO
+ * 
  * @author Midoriii
  *
  */

@@ -26,7 +26,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class BottleDTO {
 
-	private long Id;
+	private long id;
 	
 	@NotNull
 	private String name;

@@ -35,7 +35,7 @@ import lombok.NoArgsConstructor;
 public class Bottle {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private long Id;
+	private long id;
 	
 	@NotNull
 	@Column(nullable = false, unique = true)
