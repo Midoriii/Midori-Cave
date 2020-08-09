@@ -1,8 +1,12 @@
 package com.apprehension.midoricave.Controller;
 
+import java.util.Collection;
+
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.apprehension.midoricave.Model.Bottle;
 import com.apprehension.midoricave.Service.BottleService;
 import com.apprehension.midoricave.Service.Impl.BottleServiceImpl;
 
@@ -15,7 +19,7 @@ import com.apprehension.midoricave.Service.Impl.BottleServiceImpl;
  */
 
 @RestController
-@RequestMapping("/rest/bottles")
+@RequestMapping("/bottles")
 public class BottleRestController {
 	
 	private final BottleService service;
@@ -23,4 +27,11 @@ public class BottleRestController {
 	public BottleRestController(BottleServiceImpl srv) {
 		this.service = srv;
 	}
+	
+	@GetMapping("/all")
+	public Collection<Bottle> all(){
+		return service.getAllBottles();
+	}
+	
+	
 }
