@@ -1,6 +1,10 @@
 package com.apprehension.midoricave.DTO;
 
 
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.URL;
+
 import com.sun.istack.NotNull;
 
 import lombok.AllArgsConstructor;
@@ -29,4 +33,24 @@ public class BottleDTO {
 	
 	@NotNull
 	private String type;
+	
+	@NotNull
+	private String brand;
+	
+	@NotNull
+	private float percentage; 
+	
+	@NotNull
+	private float volume; 
+	
+	@Size(max = 3)
+	private String country;  
+	
+	@URL
+	private String link;
+	
+	private String description;
+	
+	@URL
+	private String img_url;
 }

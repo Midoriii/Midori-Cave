@@ -5,8 +5,9 @@ import java.util.List;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
+import com.apprehension.midoricave.DTO.BottleDTO;
 import com.apprehension.midoricave.Exception.MidoriCaveDataAccessException;
-import com.apprehension.midoricave.Model.Bottle;
+import com.apprehension.midoricave.Mapper.BottleMapper;
 import com.apprehension.midoricave.Repository.BottleRepo;
 import com.apprehension.midoricave.Service.BottleService;
 
@@ -16,32 +17,34 @@ import com.apprehension.midoricave.Service.BottleService;
 public class BottleServiceImpl implements BottleService {
 	
 	private final BottleRepo repo;
+	private final BottleMapper mapper;
 	
-	public BottleServiceImpl(BottleRepo repository) {
+	public BottleServiceImpl(BottleRepo repository, BottleMapper mapper) {
 		this.repo = repository;
+		this.mapper = mapper;
 	}
 	
 	
-	public Bottle getBottleById(Long Id) {
-		return repo.findById(Id).orElseThrow(() -> new MidoriCaveDataAccessException("Bottle with Id " + Id + ""
-				+ "cannot be found!"));
+	public BottleDTO getBottleById(Long Id) {
+		return mapper.bottleToDTO(repo.findById(Id).orElseThrow(() -> new MidoriCaveDataAccessException("Bottle with Id " + Id + ""
+				+ "cannot be found!")));
 	}
 
-	public List<Bottle> getAllBottles(){
-		return repo.findAll();
+	public List<BottleDTO> getAllBottles(){
+		return mapper.bottleToDTO(repo.findAll());
 	}
 	
-	public Bottle createBottle(Bottle bottle) {
+	public BottleDTO createBottle(BottleDTO bottle) {
 		try {
-			return repo.save(bottle);
+			return mapper.bottleToDTO(repo.save(mapper.dtoToBottle(bottle)));
 		} catch (DataAccessException e) {
 			throw new MidoriCaveDataAccessException("Cannot create Bottle", e);
 		}
 	}
 	
-	public Bottle updateBottle(Bottle bottle) {
+	public BottleDTO updateBottle(BottleDTO bottle) {
 		try {
-			return repo.save(bottle);
+			return mapper.bottleToDTO(repo.save(mapper.dtoToBottle(bottle)));
 		} catch (DataAccessException e) {
 			throw new MidoriCaveDataAccessException("Cannot update Bottle", e);
 		}
@@ -56,24 +59,24 @@ public class BottleServiceImpl implements BottleService {
 		}
 	}
 	
-	public List<Bottle> getBottleByName(String name){
-		return repo.findByNameIgnoreCaseContaining(name);
+	public List<BottleDTO> getBottleByName(String name){
+		return mapper.bottleToDTO(repo.findByNameIgnoreCaseContaining(name));
 	}
 	
-	public List<Bottle> getBottlesByType(String type){
-		return repo.findByType(type);
+	public List<BottleDTO> getBottlesByType(String type){
+		return mapper.bottleToDTO(repo.findByType(type));
 	}
 	
-	public List<Bottle> getBottlesByBrand(String brand){
-		return repo.findByBrand(brand);
+	public List<BottleDTO> getBottlesByBrand(String brand){
+		return mapper.bottleToDTO(repo.findByBrand(brand));
 	}
 	
-	public List<Bottle> getBottlesByCountry(String country_acronym){
-		return repo.findByCountry(country_acronym);
+	public List<BottleDTO> getBottlesByCountry(String country_acronym){
+		return mapper.bottleToDTO(repo.findByCountry(country_acronym));
 	}
 	
-	public List<Bottle> getBottlesByTypeAndBrand(String type, String brand){
-		return repo.findByTypeAndBrand(type, brand);
+	public List<BottleDTO> getBottlesByTypeAndBrand(String type, String brand){
+		return mapper.bottleToDTO(repo.findByTypeAndBrand(type, brand));
 	}
 
 }

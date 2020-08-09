@@ -47,15 +47,15 @@ public class Bottle {
 	
 	@NotNull
 	@Column(nullable = false)
-	private String volume;
+	private String brand;
+	
+	@NotNull
+	@Column(nullable = false)
+	private float volume;
 	
 	@NotNull
 	@Column(nullable = false)
 	private float percentage;
-	
-	@NotNull
-	@Column(nullable = false)
-	private String brand;
 	
 	@Column(name = "country_acronym" , length = 3)
 	@Size(max = 3)

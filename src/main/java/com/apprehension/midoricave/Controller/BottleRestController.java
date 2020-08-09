@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.apprehension.midoricave.Model.Bottle;
+import com.apprehension.midoricave.DTO.BottleDTO;
 import com.apprehension.midoricave.Service.BottleService;
 import com.apprehension.midoricave.Service.Impl.BottleServiceImpl;
 
@@ -32,32 +32,32 @@ public class BottleRestController {
 	}
 	
 	@GetMapping("/all/brand/{brand}")
-	public Collection<Bottle> allByBrand(@PathVariable String brand){
+	public Collection<BottleDTO> allByBrand(@PathVariable String brand){
 		return service.getBottlesByBrand(brand);
 	}
 	
 	@GetMapping("/all/type/{type}")
-	public Collection<Bottle> allByType(@PathVariable String type){
+	public Collection<BottleDTO> allByType(@PathVariable String type){
 		return service.getBottlesByType(type);
 	}
 	
 	@GetMapping("/all/name/{name}")
-	public Collection<Bottle> allByName(@PathVariable String name){
+	public Collection<BottleDTO> allByName(@PathVariable String name){
 		return service.getBottleByName(name);
 	}
 	
 	@GetMapping("/all/country/{country}")
-	public Collection<Bottle> allByCountry(@PathVariable String country){
+	public Collection<BottleDTO> allByCountry(@PathVariable String country){
 		return service.getBottlesByCountry(country);
 	}
 	
 	@GetMapping("/all")
-	public Collection<Bottle> all(){
+	public Collection<BottleDTO> all(){
 		return service.getAllBottles();
 	}
 	
 	@GetMapping("/{id}")
-	public Bottle getSingleBottle(@PathVariable Long Id) {
+	public BottleDTO getSingleBottle(@PathVariable Long Id) {
 		return service.getBottleById(Id);
 	}
 	
