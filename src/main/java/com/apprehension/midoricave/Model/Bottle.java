@@ -38,7 +38,7 @@ public class Bottle {
 	private long Id;
 	
 	@NotNull
-	@Column(nullable = false)
+	@Column(nullable = false, unique = true)
 	private String name;
 	
 	@NotNull
@@ -58,7 +58,7 @@ public class Bottle {
 	private String brand;
 	
 	@Column(name = "country_acronym" , length = 3)
-    @Size(max = 3)
+	@Size(max = 3)
 	private String country;
 	
 	// A Link to a shop where it can be bought
