@@ -19,8 +19,6 @@ import com.apprehension.midoricave.Service.Impl.BottleServiceImpl;
  *
  */
 
-//TODO switch to DTOs when rdy
-
 @RestController
 @RequestMapping("/bottles")
 public class BottleRestController {
@@ -57,8 +55,8 @@ public class BottleRestController {
 	}
 	
 	@GetMapping("/{id}")
-	public BottleDTO getSingleBottle(@PathVariable Long Id) {
-		return service.getBottleById(Id);
+	public BottleDTO getSingleBottle(@PathVariable Long id) {
+		return service.getBottleById(id);
 	}
 	
 	

@@ -11,7 +11,6 @@ import com.apprehension.midoricave.Mapper.BottleMapper;
 import com.apprehension.midoricave.Repository.BottleRepo;
 import com.apprehension.midoricave.Service.BottleService;
 
-//TODO add mapping DTO <-> POJO
 
 @Service
 public class BottleServiceImpl implements BottleService {

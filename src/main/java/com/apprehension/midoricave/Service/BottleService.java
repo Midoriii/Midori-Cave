@@ -11,8 +11,6 @@ import com.apprehension.midoricave.DTO.BottleDTO;
  *
  */
 
-//TODO Add proper types when mapping DTO <-> POJO is added
-
 public interface BottleService {
 	/**
 	 * 
