@@ -16,6 +16,9 @@ import lombok.NoArgsConstructor;
 /**
  * A DTO for my Bottle class
  * 
+ * Doesn't extend EntityModel since I have no interest in
+ * creating HATEOAS, simple REST is enough
+ * 
  * @author Midoriii
  *
  */

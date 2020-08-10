@@ -27,6 +27,14 @@ public class BottleRepositoryTest {
 	private Bottle bottle1;
 	private Bottle bottle2;
 	
+	/**
+	 * Notes to Self:
+	 * This, coupled with @saveInitData and @Transactional is probably the best way
+	 * to ensure that data is created and deleted before and after each test.
+	 * Creating all the data would be possible, but then it'd be difficult to test the
+	 * creation itself. Perhaps when testing a different stuff than CRUD Repo.
+	 */
+	
 	@BeforeEach
 	public void init() {
 		bottle1 = Bottle.builder()
@@ -56,7 +64,7 @@ public class BottleRepositoryTest {
 	}
 	
 	@Test
-	public void createBottleTest() {
+	public void createBottleAndFindByIdTest() {
 		repo.save(bottle1);
 		
 		assertThat(bottle1.getId()).isNotNull();
@@ -87,5 +95,40 @@ public class BottleRepositoryTest {
 		repo.delete(bottle2);
 		
 		assertThat(repo.findAll()).containsExactly(bottle1);
+	}
+	
+	@Test 
+	public void findByBrandTest() {
+		saveInitData();
+		
+		assertThat(repo.findByBrand("Yarr")).containsExactly(bottle2);
+	}
+	
+	@Test 
+	public void findByCountryTest() {
+		saveInitData();
+		
+		assertThat(repo.findByCountry("JAM")).containsExactly(bottle2);
+	}
+	
+	@Test 
+	public void findByTypeTest() {
+		saveInitData();
+		
+		assertThat(repo.findByType("Gin")).containsExactly(bottle1);
+	}
+	
+	@Test 
+	public void findByNameTest() {
+		saveInitData();
+		
+		assertThat(repo.findByNameIgnoreCaseContaining("Navy")).containsExactly(bottle2);
+	}
+	
+	@Test 
+	public void findByTypeAndBrandTest() {
+		saveInitData();
+		
+		assertThat(repo.findByTypeAndBrand("Gin", "Midoriii")).containsExactly(bottle1);
 	}
 }
