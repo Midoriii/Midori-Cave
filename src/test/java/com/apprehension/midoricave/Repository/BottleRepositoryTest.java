@@ -1,14 +1,18 @@
 package com.apprehension.midoricave.Repository;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import javax.transaction.Transactional;
+import javax.validation.ConstraintViolationException;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
@@ -130,5 +134,59 @@ public class BottleRepositoryTest {
 		saveInitData();
 		
 		assertThat(repo.findByTypeAndBrand("Gin", "Midoriii")).containsExactly(bottle1);
+	}
+	
+	@Test 
+	public void addingIdenticalBottleNameTest() {
+		saveInitData();
+		
+		Bottle bottle3 = Bottle.builder()
+				.name("Navy Rum")
+				.brand("Arrgh")
+				.type("Rum")
+				.country("JAM")
+				.volume(1.0f)
+				.percentage(35.5f)
+				.description("Totally not a knockoff")
+				.build();
+		
+		assertThatThrownBy(() -> repo.save(bottle3)).isInstanceOf(DataIntegrityViolationException.class);
+	}
+	
+	@Test 
+	public void addingBottleWithoutTypeTest() {
+		Bottle bottle4 = Bottle.builder()
+				.name("Strange moonshine")
+				.brand("X")
+				.country("USA")
+				.volume(1.5f)
+				.percentage(85.0f)
+				.description("What is this swill")
+				.build();
+		
+		assertThatThrownBy(() -> repo.save(bottle4)).isInstanceOf(ConstraintViolationException.class);
+	}
+	
+	@Test 
+	public void wronglyUpdatingBottleTest() {
+		bottle1.setCountry("TORILE");
+		assertThatThrownBy(() -> repo.save(bottle1)).isInstanceOf(ConstraintViolationException.class);
+	}
+	
+	@Test 
+	public void wronglyUpdatingBottleWithNullTest() {
+		bottle1.setBrand(null);
+		assertThatThrownBy(() -> repo.save(bottle1)).isInstanceOf(ConstraintViolationException.class);
+	}
+	
+	@Test 
+	public void wronglyUpdatingBottleUrlException() {
+		bottle1.setImg_url("lalallala]]45345***3");
+		assertThatThrownBy(() -> repo.save(bottle1)).isInstanceOf(ConstraintViolationException.class);
+	}
+	
+	@Test 
+	public void deletingNonexistentBottlebyIdTest() {
+		assertThatThrownBy(() -> repo.deleteById(2l)).isInstanceOf(EmptyResultDataAccessException.class);
 	}
 }
