@@ -63,19 +63,19 @@ public class BottleServiceImpl implements BottleService {
 	}
 	
 	public List<BottleDTO> getBottlesByType(String type){
-		return mapper.bottleToDTO(repo.findByType(type));
+		return mapper.bottleToDTO(repo.findByTypeIgnoreCase(type));
 	}
 	
 	public List<BottleDTO> getBottlesByBrand(String brand){
-		return mapper.bottleToDTO(repo.findByBrand(brand));
+		return mapper.bottleToDTO(repo.findByBrandIgnoreCase(brand));
 	}
 	
 	public List<BottleDTO> getBottlesByCountry(String country_acronym){
-		return mapper.bottleToDTO(repo.findByCountry(country_acronym));
+		return mapper.bottleToDTO(repo.findByCountryIgnoreCase(country_acronym));
 	}
 	
 	public List<BottleDTO> getBottlesByTypeAndBrand(String type, String brand){
-		return mapper.bottleToDTO(repo.findByTypeAndBrand(type, brand));
+		return mapper.bottleToDTO(repo.findByTypeIgnoreCaseAndBrandIgnoreCase(type, brand));
 	}
 
 }

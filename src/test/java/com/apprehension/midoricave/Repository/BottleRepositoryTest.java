@@ -105,21 +105,21 @@ public class BottleRepositoryTest {
 	public void findByBrandTest() {
 		saveInitData();
 		
-		assertThat(repo.findByBrand("Yarr")).containsExactly(bottle2);
+		assertThat(repo.findByBrandIgnoreCase("Yarr")).containsExactly(bottle2);
 	}
 	
 	@Test 
 	public void findByCountryTest() {
 		saveInitData();
 		
-		assertThat(repo.findByCountry("JAM")).containsExactly(bottle2);
+		assertThat(repo.findByCountryIgnoreCase("JAM")).containsExactly(bottle2);
 	}
 	
 	@Test 
 	public void findByTypeTest() {
 		saveInitData();
 		
-		assertThat(repo.findByType("Gin")).containsExactly(bottle1);
+		assertThat(repo.findByTypeIgnoreCase("gin")).containsExactly(bottle1);
 	}
 	
 	@Test 
@@ -133,7 +133,7 @@ public class BottleRepositoryTest {
 	public void findByTypeAndBrandTest() {
 		saveInitData();
 		
-		assertThat(repo.findByTypeAndBrand("Gin", "Midoriii")).containsExactly(bottle1);
+		assertThat(repo.findByTypeIgnoreCaseAndBrandIgnoreCase("gin", "MidOrIii")).containsExactly(bottle1);
 	}
 	
 	@Test 

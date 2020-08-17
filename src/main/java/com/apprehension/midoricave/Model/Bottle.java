@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.URL;
@@ -49,10 +50,12 @@ public class Bottle {
 	private String brand;
 	
 	@NotNull
+	@Positive
 	@Column(nullable = false)
 	private float volume;
 	
 	@NotNull
+	@Positive
 	@Column(nullable = false)
 	private float percentage;
 	

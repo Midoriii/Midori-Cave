@@ -20,7 +20,7 @@ import com.apprehension.midoricave.Service.Impl.BottleServiceImpl;
  */
 
 @RestController
-@RequestMapping("/bottles")
+@RequestMapping("/rest/bottles")
 public class BottleRestController {
 	
 	private final BottleService service;
@@ -54,7 +54,7 @@ public class BottleRestController {
 		return service.getAllBottles();
 	}
 	
-	@GetMapping("/{id}")
+	@GetMapping("/single/{id}")
 	public BottleDTO getSingleBottle(@PathVariable Long id) {
 		return service.getBottleById(id);
 	}

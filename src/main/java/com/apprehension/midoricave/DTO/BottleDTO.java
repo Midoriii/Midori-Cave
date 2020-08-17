@@ -1,6 +1,7 @@
 package com.apprehension.midoricave.DTO;
 
 
+import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.URL;
@@ -41,9 +42,11 @@ public class BottleDTO {
 	private String brand;
 	
 	@NotNull
+	@Positive
 	private float percentage; 
 	
 	@NotNull
+	@Positive
 	private float volume; 
 	
 	@Size(max = 3)
